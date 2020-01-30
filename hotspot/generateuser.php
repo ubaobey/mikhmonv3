@@ -308,6 +308,31 @@ date_default_timezone_set($_SESSION['timezone']);
 
 }
 ?>
+<div class="col-4 col-box-6">
+			<div class="box bg-blue bmh-75">
+				<h1><?= $counthotspotactive; ?>
+				<span style="font-size: 15px;"><?= $hunit; ?></span>
+					</h1>
+						<div>
+						<i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
+					</div>
+			</div>
+		</div>	
+		
+		     <div class="col-4 col-box-6">
+        <div id='./hotspot/quickuser.php?quickprint=<?= $qpname ?>&session=<?= $session; ?>' class="quick pointer box bg-yellow bmh-75 <?= $color[rand(1, 2)]; ?>" title='<?= $_print.' '.$_package.' '. $package; ?>'>
+          <div class="box-group">
+            <div class="box-group-icon">
+            	<i class="fa fa-print"></i>
+            </div>
+              <div class="box-group-area">
+                <h3 ><?=  $package; ?> <br></h3>
+                <span><?= $_validity ?>  : <?= $validity ?> | <?= $_price ?>  : <?= $price ?></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
 <div class="row">
 	
 <div class="col-8">
@@ -379,30 +404,7 @@ date_default_timezone_set($_SESSION['timezone']);
 </div>
 </div>
 
-		<div class="col-4 col-box-6">
-			<div class="box bg-blue bmh-75">
-				<h1><?= $counthotspotactive; ?>
-				<span style="font-size: 15px;"><?= $hunit; ?></span>
-					</h1>
-						<div>
-						<i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
-					</div>
-			</div>
-		</div>	
-		
-		     <div class="col-4 col-box-6">
-        <div id='./hotspot/quickuser.php?quickprint=<?= $qpname ?>&session=<?= $session; ?>' class="quick pointer box bg-yellow bmh-75 <?= $color[rand(1, 2)]; ?>" title='<?= $_print.' '.$_package.' '. $package; ?>'>
-          <div class="box-group">
-            <div class="box-group-icon">
-            	<i class="fa fa-print"></i>
-            </div>
-              <div class="box-group-area">
-                <h3 ><?=  $package; ?> <br></h3>
-                <span><?= $_validity ?>  : <?= $validity ?> | <?= $_price ?>  : <?= $price ?></span>
-              </div>
-            </div>
-          </div>
-        </div>	
+			
 		
 		<div class="col-4">
 	<div class="card">

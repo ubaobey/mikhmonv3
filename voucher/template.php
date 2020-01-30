@@ -1,8 +1,5 @@
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										<?php
+<?php
 // Copy Paste ke template editor [Settings -> Template Editor].
-
-
-
 if(substr($validity,-1) == "d"){
   $validity = "".substr($validity,0,-1)." HARI";
 }else if(substr($validity,-1) == "h"){
@@ -58,17 +55,16 @@ else{ $color = "#00a105";}
 <tr>
 <td style="width:75px">
 <div style="position:relative;z-index:-1;padding: 0px;float:left;">
-<div style="position:absolute;top:0;display:inline;margin-top:-100px;width: 0; height: 1; border-top: 230px solid transparent;border-left: 50px solid transparent;border-right:140px solid transparent; "></div>
+<div style="position:absolute;top:0;display:inline;margin-top:-100px;width: 0; height: 0; border-top: 230px solid transparent;border-left: 50px solid transparent;border-right:140px solid #DCDCDC; "></div>
 </div>
-<div style="padding:0px;text-align:left;font-size:15px;font-family:Tahoma code;font-weight:bold;color:#000000;">CAHYA HOTSPOT
+<img style="margin:5px 0 0 5px;" width="100" height="25" src="<?php echo $logo;?>" alt="logo">
 </td>	
 <td style="width:115px">
 <div style="float:right;margin-top:-6px;margin-right:0px;width:5%;text-align:right;font-size:7px;">
 </div>
-<div style="text-align:right;font-weight:bold;font-family:times new roman;font-size:18px;padding-left:7px;color:#000000;">
+<div style="text-align:right;font-weight:bold;font-family:times new roman;font-size:18px;padding-left:7px;color:<?php echo $color ?>">
 <small style="font-size:15px;margin-left:-7px;"></small><?php echo $validity;?>
-<br/><span id="num"><?= " [$num]"; ?></span>
-
+<br/><?php echo $datalimit;?>
 </div>	
 </td>		
 </tr>
@@ -82,10 +78,11 @@ else{ $color = "#00a105";}
 <tbody>
 <tr>
 <td style="width:95px"valign="top" >
-<div style="clear:both;color:#555;margin-top:2px;margin-left:18px;margin-bottom:2.5px;">
+<div style="clear:both;color:#555;margin-top:2px;margin-bottom:2.5px;">
 <?php if($v_opsi=='up'){ ?>
 <?php }else{ ?>
-<div style="padding:0px;text-align:left;font-size:21px;font-family:Tahoma code;font-weight:bold;color:#000000;"><?php echo $username;?></div>
+<div style="padding:0px;border-bottom:1px solid<?php echo $color ?>;text-align:center;font-weight:bold;font-size:10px;">VOUCHER</div>
+<div style="padding:0px;border-bottom:1px solid<?php echo $color ?>;text-align:center;font-size:20px;font-family:courier prime code;font-weight:bold;color:#000000;"><?php echo $username;?></div>
 <?php } ?>
 </div>
 <div style="text-align:center;color:#111;font-size:7px;font-weight:bold;margin:0px;padding:2.5px;">
@@ -101,10 +98,10 @@ else{ $color = "#00a105";}
 </td>		
 </tr>
 <tr>
-<td style="color:#666;padding:0px;" valign="top" colspan="2">
-<div style="text-align:left;font-size:13px;font-weight:bold;margin:0px;padding:2.5px;color:#000000;">
+<td style="background:<?php echo $color ?>;color:#666;padding:0px;" valign="top" colspan="2">
+<div style="text-align:left;color:#fff;font-size:9px;font-weight:bold;margin:0px;padding:2.5px;">
 -<?= $comment; ?>
-<b></b>
+	<b></b>
 </div>
 </td>
 </tr>
@@ -113,4 +110,4 @@ else{ $color = "#00a105";}
 </td>
 </tr>
 </tbody>
-</table>	        	        	        	        	        	        	        	        	        	        	        	    	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        
+</table>	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        
