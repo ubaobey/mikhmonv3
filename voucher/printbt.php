@@ -1,3 +1,4 @@
+<?php date_default_timezone_set($_SESSION['timezone']); ?>
 <script>
 function sendToQuickPrinterChrome(){
  
@@ -118,7 +119,7 @@ else{ $color = "#00a105";}
 </td>
 </tr>
 </tbody>
-</table>	        	        	        	        	        	        	        	        	        	        	        	    	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	   
+</table>	        	        	        	        	        	        	        	        	        	        	        	    	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        	        
                 ;
     var textEncoded = encodeURI(commandsToPrint);
     window.location.href="intent://"+textEncoded+"#Intent;scheme=quickprinter;package=pe.diegoveloper.printerserverapp;end;";
