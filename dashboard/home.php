@@ -308,12 +308,9 @@ date_default_timezone_set($_SESSION['timezone']);
 
 }
 ?>
-
-
-
 <div class="row">
-
-<div class="col-7">
+	
+<div class="col-8">
 <div class="card box-bordered">
 	<div class="card-header">
 	<h3><i class="fa fa-user-plus"></i> <?= $_generate_user ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3> 
@@ -327,7 +324,7 @@ date_default_timezone_set($_SESSION['timezone']);
 </div>
 <table class="table">
   <tr>
-    <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="0" required="1"></div></td>
+    <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="" required="1"></div></td>
   </tr>
   <tr>
     <td class="align-middle">Server</td>
@@ -349,9 +346,7 @@ date_default_timezone_set($_SESSION['timezone']);
       <select class="form-control " id="userl" name="userl" required="1">
         <option>8</option>
   </tr>
-  <tr>
-	<td class="align-middle"><?= $_prefix ?></td><td><input class="form-control " type="text" size="6" maxlength="6" autocomplete="off" name="prefix" value=""></td>
-  </tr>
+
   <tr>
     <td class="align-middle"><?= $_character ?></td><td>
 		      <select class="form-control " name="char" required="1">
@@ -384,7 +379,7 @@ date_default_timezone_set($_SESSION['timezone']);
 </div>
 </div>
 
-		<div class="col-5 col-box-6">
+		<div class="col-4 col-box-6">
 			<div class="box bg-blue bmh-75">
 				<h1><?= $counthotspotactive; ?>
 				<span style="font-size: 15px;"><?= $hunit; ?></span>
@@ -394,8 +389,8 @@ date_default_timezone_set($_SESSION['timezone']);
 					</div>
 			</div>
 		</div>	
-
-	<div class="col-5 col-box-6">
+		
+		     <div class="col-4 col-box-6">
         <div id='./hotspot/quickuser.php?quickprint=<?= $qpname ?>&session=<?= $session; ?>' class="quick pointer box bg-yellow bmh-75 <?= $color[rand(1, 2)]; ?>" title='<?= $_print.' '.$_package.' '. $package; ?>'>
           <div class="box-group">
             <div class="box-group-icon">
@@ -409,7 +404,7 @@ date_default_timezone_set($_SESSION['timezone']);
           </div>
         </div>	
 		
-		<div class="col-5">
+		<div class="col-4">
 	<div class="card">
 		<div class="card-header">
 			<h3><i class="fa fa-ticket"></i> <?= $_last_generate ?></h3>
@@ -422,11 +417,6 @@ date_default_timezone_set($_SESSION['timezone']);
   <tr>
   	<td><?= $_date ?></td><td><?= $udate ?></td>
   </tr>
-  <tr>
-  	<td><?= $_validity ?></td><td><?= $uvalid ?></td>
-  <tr>
-  	<td><?= $_selling_price ?></td><td><?= $suprice ?></td>
-  </tr>
 </table>
 </div>
 </div>
@@ -434,8 +424,6 @@ date_default_timezone_set($_SESSION['timezone']);
 </div>		
 
 
-	
-	</div>
 <script>
 // get valid $ price
 function GetVP(){
