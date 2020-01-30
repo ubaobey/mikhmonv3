@@ -8,10 +8,11 @@ function sendToQuickPrinterChrome(){
                         //"<line0>\n" +
                         "<center><?= date("d-m-Y h:i:sa") ?>\n" +
 						"<center>Masa Aktif : <?= $validity ?>\n" +
+						"<center>Login : http://<?= $dnsname ?>\n" +
                         "<line0>\n" +
-						"<center><bold><?= $uname ?>\n" +
+						"<center><big><bold><?= $uname ?>\n" +
                         "<line0>\n" +
-                        "<center>Login : http://<?= $dnsname ?>\n" +
+						"<center>.\n" +
 						"<center>.\n" +
                         //"<line0>\n" +
                         <?php if($qrbt == "enable"){
