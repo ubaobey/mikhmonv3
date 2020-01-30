@@ -49,6 +49,17 @@ for ($i = 0; $i < $TotalReg; $i++) {
     $hunit = "items";
   }
 
+// get MikroTik system clock
+  $getclock = $API->comm("/system/clock/print");
+  $clock = $getclock[0];
+  $timezone = $getclock[0]['time-zone-name'];
+  $_SESSION['timezone'] = $timezone;
+  date_default_timezone_set($timezone);
+
+// get system resource MikroTik
+  $getresource = $API->comm("/system/resource/print");
+  $resource = $getresource[0];
+
 // time zone
 date_default_timezone_set($_SESSION['timezone']);
 
@@ -423,6 +434,22 @@ date_default_timezone_set($_SESSION['timezone']);
 </div>
 </div>
 </div>
+      <div class="col-4">
+        <div class="box bmh-75 box-bordered">
+          <div class="box-group">
+            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
+              <div class="box-group-area">
+                <span ><?= $_system_date_time ?><br>
+                    <?php 
+                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
+                    ".$_uptime." : " . formatDTM($resource['uptime']);
+                    $_SESSION[$session.'sdate'] = $clock['date'];
+                    ?>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
 </div>		
 
 

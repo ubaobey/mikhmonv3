@@ -6,20 +6,13 @@ function sendToQuickPrinterChrome(){
 
                         "<center><big><bold><?= $hotspotname ?>\n" +
                         //"<line0>\n" +
-                        "<center><?= date("Y-m-d h:i:sa") ?>\n" +
+                        "<center><?= date("d-m-Y h:i:sa") ?>\n" +
+						"<center>Masa Aktif : <?= $validity ?>\n" +
                         "<line0>\n" +
-                        <?php if($uname == $upass){
-                        echo '"'.$_voucher_code.' :;; '. $uname.'\n" +';
-                        }else{
-                          echo '"'.$_user_name.' :;; '. $uname.'\n" +
-                        "'.$_password.' :;; '. $upass.'\n" +';
-                        }?>
-                        <?php if($getvalid != ""){
-                          echo '"'.$_validity.' :;; '.$validity.'\n" +';
-                        }?>
-                        
+						"<center><bold><?= $uname ?>\n"
                         "<line0>\n" +
                         "<center>Login : http://<?= $dnsname ?>\n" +
+						"<center>.<?=  ?>\n" +
                         //"<line0>\n" +
                         <?php if($qrbt == "enable"){
                           echo '"<center><image>" + "'.$qrcode.'" +"\n"';
