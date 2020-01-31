@@ -65,8 +65,8 @@ date_default_timezone_set($_SESSION['timezone']);
 		$qty = ($_POST['qty']);
 		$server = "all";
 		$user = "vc";
-		$userl = "6";
-		$prefix = "a";
+		$userl = "4";
+		$prefix = date('dm');
 		$char = "num";
 		$profile = "8-JAM";
 		$timelimit = "0";
@@ -293,15 +293,6 @@ date_default_timezone_set($_SESSION['timezone']);
 	<div class="card-body">
 <form autocomplete="off" method="post" action="">
 	<div>
-		<?php if ($_SESSION['ubp'] != "") {
-		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
-	} elseif ($_SESSION['vcr'] = "active") {
-		echo "    <a class='btn bg-warning' href='./?hotspot=users-by-profile&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
-	} else {
-		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
-	}
-
-	?>
 	<a class="btn bg-pink" title="Open User List by Profile 
 <?php if ($_SESSION['ubp'] == "") {
 	echo "all";
@@ -315,8 +306,6 @@ date_default_timezone_set($_SESSION['timezone']);
 } ?>&session=<?= $session; ?>"> <i class="fa fa-users"></i> <?= $_user_list ?></a>
     <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> <?= $_generate ?></button>
     <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print ?></a>
-    <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
-    <a class="btn bg-info" title="Print Small" href="./voucher/print.php?id=<?= $urlprint; ?>&small=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print_small ?></a>
 </div>
 <table class="table">
   <tr>
