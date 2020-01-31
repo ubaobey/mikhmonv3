@@ -1,5 +1,20 @@
 <?php
-
+/*
+ *  Copyright (C) 2018 Laksamadi Guko.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 session_start();
 // hide all error
 error_reporting(0);
@@ -8,58 +23,7 @@ ini_set('max_execution_time', 300);
 
 if (!isset($_SESSION["mikhmon"])) {
 	header("Location:../admin.php?id=login");
-} else  { 
-$color = array('1' => 'bg-blue', 'bg-indigo', 'bg-purple', 'bg-pink', 'bg-red', 'bg-yellow', 'bg-green', 'bg-teal', 'bg-cyan', 'bg-grey', 'bg-light-blue'); 
-}
-// get quick print
-$getquickprint = $API->comm("/system/script/print", array("?comment" => "CAHYA"));
-$TotalReg = count($getquickprint);
-for ($i = 0; $i < $TotalReg; $i++) {
-  $quickprintdetails = $getquickprint[$i];
-  $qpname = $quickprintdetails['name'];
-  $qpid = $quickprintdetails['.id'];
-  $quickprintsource = explode("#",$quickprintdetails['source']);
-  $package = $quickprintsource[1];
-  $server = $quickprintsource[2];
-  $usermode = $quickprintsource[3];
-  $userlength = $quickprintsource[4];
-  $prefix = $quickprintsource[5];
-  $char = $quickprintsource[6];
-  $profile = $quickprintsource[7];
-  $timelimit = $quickprintsource[8];
-  $datalimit = $quickprintsource[9];
-  $comment = $quickprintsource[10];
-  $validity = $quickprintsource[11];
-  $getprice = explode("_",$quickprintsource[12])[0];
-  $getsprice = explode("_",$quickprintsource[12])[1];
-  $userlock = $quickprintsource[13];
-  if ($currency == in_array($currency, $cekindo['indo'])) {
-    $price = $currency . " " . number_format($getprice, 0, ",", ".");
-    $sprice = $currency . " " . number_format($getsprice, 0, ",", ".");
 } else {
-    $price = $currency . " " . number_format($getprice);
-    $sprice = $currency . " " . number_format($getsprice);
-}
-
-//hotspot aktif
-  $counthotspotactive = $API->comm("/ip/hotspot/active/print", array("count-only" => ""));
-  if ($counthotspotactive < 2) {
-    $hunit = "item";
-  } elseif ($counthotspotactive > 1) {
-    $hunit = "items";
-  }
-
-// get MikroTik system clock
-  $getclock = $API->comm("/system/clock/print");
-  $clock = $getclock[0];
-  $timezone = $getclock[0]['time-zone-name'];
-  $_SESSION['timezone'] = $timezone;
-  date_default_timezone_set($timezone);
-
-// get system resource MikroTik
-  $getresource = $API->comm("/system/resource/print");
-  $resource = $getresource[0];
-
 // time zone
 date_default_timezone_set($_SESSION['timezone']);
 
@@ -99,14 +63,14 @@ date_default_timezone_set($_SESSION['timezone']);
 	if (isset($_POST['qty'])) {
 		
 		$qty = ($_POST['qty']);
-		$server = ($_POST['server']);
-		$user = ($_POST['user']);
-		$userl = ($_POST['userl']);
-		$prefix = ($_POST['prefix']);
-		$char = ($_POST['char']);
-		$profile = ($_POST['profile']);
-		$timelimit = ($_POST['timelimit']);
-		$datalimit = ($_POST['datalimit']);
+		$server = "all";
+		$user = "vc";
+		$userl = "6";
+		$prefix = "a";
+		$char = "num";
+		$profile = "8-JAM";
+		$timelimit = "0";
+		$datalimit = "0";
 		$adcomment = ($_POST['adcomment']);
 		$mbgb = ($_POST['mbgb']);
 		if ($timelimit == "") {
@@ -319,31 +283,6 @@ date_default_timezone_set($_SESSION['timezone']);
 
 }
 ?>
-<div class="col-4 col-box-6">
-			<div class="box bg-blue bmh-75">
-				<h1><?= $counthotspotactive; ?>
-				<span style="font-size: 15px;"><?= $hunit; ?></span>
-					</h1>
-						<div>
-						<i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
-					</div>
-			</div>
-		</div>	
-		
-		     <div class="col-4 col-box-6">
-        <div id='./hotspot/quickuser.php?quickprint=<?= $qpname ?>&session=<?= $session; ?>' class="quick pointer box bg-yellow bmh-75 <?= $color[rand(1, 2)]; ?>" title='<?= $_print.' '.$_package.' '. $package; ?>'>
-          <div class="box-group">
-            <div class="box-group-icon">
-            	<i class="fa fa-print"></i>
-            </div>
-              <div class="box-group-area">
-                <h3 ><?=  $package; ?> <br></h3>
-                <span><?= $_validity ?>  : <?= $validity ?> | <?= $_price ?>  : <?= $price ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
 <div class="row">
 	
 <div class="col-8">
@@ -354,51 +293,36 @@ date_default_timezone_set($_SESSION['timezone']);
 	<div class="card-body">
 <form autocomplete="off" method="post" action="">
 	<div>
-    <button class="box bg-green bmh-40"><i class="fa fa-save"></i> <?= $_generate ?></button>
-    <a class="box bg-blue bmh-40" title="Print" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print ?></a>
+		<?php if ($_SESSION['ubp'] != "") {
+		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
+	} elseif ($_SESSION['vcr'] = "active") {
+		echo "    <a class='btn bg-warning' href='./?hotspot=users-by-profile&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
+	} else {
+		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
+	}
 
+	?>
+	<a class="btn bg-pink" title="Open User List by Profile 
+<?php if ($_SESSION['ubp'] == "") {
+	echo "all";
+} else {
+	echo $uprofile;
+} ?>" href="./?hotspot=users&profile=
+<?php if ($_SESSION['ubp'] == "") {
+	echo "all";
+} else {
+	echo $uprofile;
+} ?>&session=<?= $session; ?>"> <i class="fa fa-users"></i> <?= $_user_list ?></a>
+    <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> <?= $_generate ?></button>
+    <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print ?></a>
+    <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
+    <a class="btn bg-info" title="Print Small" href="./voucher/print.php?id=<?= $urlprint; ?>&small=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print_small ?></a>
 </div>
 <table class="table">
   <tr>
     <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="" required="1"></div></td>
   </tr>
-  <tr>
-    <td class="align-middle">Server</td>
-    <td>
-		<select class="form-control " name="server" required="1" value="all">
-			<option>all</option>
-		</select>
-	</td>
-	</tr>
-	<tr>
-    <td class="align-middle"><?= $_user_mode ?></td><td>
-			<select class="form-control " onchange="defUserl();" id="user" name="user" required="1">
-				<option value="vc"><?= $_user_user ?></option>
-			</select>
-		</td>
-	</tr>
-  <tr>
-    <td class="align-middle"><?= $_user_length ?></td><td>
-      <select class="form-control " id="userl" name="userl" required="1">
-        <option>8</option>
-  </tr>
 
-  <tr>
-    <td class="align-middle"><?= $_character ?></td><td>
-		      <select class="form-control " name="char" required="1">
-				<option id="num" style="display:none;" value="num"><?= $_random ?> 1234</option>
-			</select>
-    </td>
-  </tr>
-  <tr>
-    <td class="align-middle"><?= $_profile ?></td><td>
-		<select class="form-control " onchange="GetVP();" id="uprof" name="profile" required="1">
-				<option>8-JAM</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-  </tr>
 	<tr>
     <td class="align-middle"><?= $_comment ?></td><td><input class="form-control " type="text" title="No special characters" id="comment" autocomplete="off" name="adcomment" value=""></td>
   </tr>
@@ -415,9 +339,7 @@ date_default_timezone_set($_SESSION['timezone']);
 </div>
 </div>
 
-			
-		
-		<div class="col-4">
+<div class="col-4">
 	<div class="card">
 		<div class="card-header">
 			<h3><i class="fa fa-ticket"></i> <?= $_last_generate ?></h3>
@@ -425,34 +347,45 @@ date_default_timezone_set($_SESSION['timezone']);
 		<div class="card-body">
 <table class="table table-bordered">
   <tr>
-  	<td><?= $_generate_code ?></td><td><?= $ucode ?></td>
+  	<td><?= $_qty ?></td><td><?= $qty ?></td>
   </tr>
   <tr>
   	<td><?= $_date ?></td><td><?= $udate ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_profile ?></td><td><?= $uprofile ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_validity ?></td><td><?= $uvalid ?></td>
+  <tr>
+  	<td><?= $_time_limit ?></td><td><?= $utlimit ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_data_limit ?></td><td><?= $udlimit ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_price ?></td><td><?= $uprice ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_selling_price ?></td><td><?= $suprice ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_lock_user ?></td><td><?= $ulock ?></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+		<p style="padding:0px 5px;">
+      <?= $_format_time_limit ?>
+    </p>
+    <p style="padding:0px 5px;">
+      <?= $_details_add_user ?>
+    </p>
+    </td>
   </tr>
 </table>
 </div>
 </div>
 </div>
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
-              <div class="box-group-area">
-                <span ><?= $_system_date_time ?><br>
-                    <?php 
-                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
-                    ".$_uptime." : " . formatDTM($resource['uptime']);
-                    $_SESSION[$session.'sdate'] = $clock['date'];
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-</div>		
-
-
 <script>
 // get valid $ price
 function GetVP(){
@@ -460,14 +393,4 @@ function GetVP(){
   $("#GetValidPrice").load("./process/getvalidprice.php?name="+prof+"&session=<?= $session; ?> #getdata");
 } 
 </script>
-
-<script>
-$(document).ready(function(){
-  $(".quick").click(function(){
-
-    loadpage(this.id);
-    
-  });
-
-});
-</script>
+</div>

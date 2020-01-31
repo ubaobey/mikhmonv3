@@ -36,7 +36,7 @@ if (!isset($_SESSION["mikhmon"])) {
 <div class="row">
 <?php
 // get quick print
-$getquickprint = $API->comm("/system/script/print", array("?comment" => "YOGA"));
+$getquickprint = $API->comm("/system/script/print", array("?comment" => "CAHYA"));
 $TotalReg = count($getquickprint);
 for ($i = 0; $i < $TotalReg; $i++) {
   $quickprintdetails = $getquickprint[$i];
