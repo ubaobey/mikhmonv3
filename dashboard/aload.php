@@ -162,7 +162,7 @@ include('../lang/'.$langid.'.php');
                   </div>
                   <div class="col-3 col-box-6">
                     <div class="box bg-yellow bmh-75">
-                      <a href="./?hotspot-user=add&session=<?= $session; ?>">
+                      <a href="./?hotspot=quick-print&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_add ?></span>
@@ -176,7 +176,7 @@ include('../lang/'.$langid.'.php');
                   </div>
                   <div class="col-3 col-box-6">
                     <div class="box bg-red bmh-75">
-                      <a href="./?hotspot-user=generate&session=<?= $session; ?>">
+                      <a href="./?hotspot=quick-print&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_generate ?></span>

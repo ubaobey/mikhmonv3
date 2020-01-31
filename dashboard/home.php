@@ -20,8 +20,7 @@ session_start();
 error_reporting(0);
 if (!isset($_SESSION["mikhmon"])) {
   header("Location:../admin.php?id=login");
-} else {
-
+} 
 
 // get MikroTik system clock
   $getclock = $API->comm("/system/clock/print");
@@ -108,64 +107,10 @@ if (!isset($_SESSION["mikhmon"])) {
       $tBl += explode("-|-", $getSRBl[$i]['name'])[3];
     }
   }*/
-}
+
 ?>
-    
+   
 <div id="reloadHome">
-
-    <div id="r_1" class="row">
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
-              <div class="box-group-area">
-                <span ><?= $_system_date_time ?><br>
-                    <?php 
-                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
-                    ".$_uptime." : " . formatDTM($resource['uptime']);
-                    $_SESSION[$session.'sdate'] = $clock['date'];
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-          <div class="box-group-icon"><i class="fa fa-info-circle"></i></div>
-              <div class="box-group-area">
-                <span >
-                    <?php
-                    echo $_board_name." : " . $resource['board-name'] . "<br/>
-                    ".$_model." : " . $routerboard['model'] . "<br/>
-                    Router OS : " . $resource['version'];
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-    <div class="col-4">
-      <div class="box bmh-75 box-bordered">
-        <div class="box-group">
-          <div class="box-group-icon"><i class="fa fa-server"></i></div>
-              <div class="box-group-area">
-                <span >
-                    <?php
-                    echo $_cpu_load." : " . $resource['cpu-load'] . "%<br/>
-                    ".$_free_memory." : " . formatBytes($resource['free-memory'], 2) . "<br/>
-                    ".$_free_hdd." : " . formatBytes($resource['free-hdd-space'], 2)
-                    ?>
-                </span>
-                </div>
-              </div>
-            </div>
-          </div> 
-      </div>
-
-        <div class="row">
-          <div  class="col-8">
             <div id="r_2"class="row">
             <div class="card">
               <div class="card-header"><h3><i class="fa fa-wifi"></i> Hotspot</h3></div>
@@ -195,9 +140,10 @@ if (!isset($_SESSION["mikhmon"])) {
                       </a>
                     </div>
                   </div>
+         
                   <div class="col-3 col-box-6">
                     <div class="box bg-yellow bmh-75">
-                      <a onclick="cancelPage()" href="./?hotspot=quick-print&session=<?= $session; ?>">
+                      <a href="./?hotspot=quick-print&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_add ?></span>
@@ -209,9 +155,10 @@ if (!isset($_SESSION["mikhmon"])) {
                       </a>
                     </div>
                   </div>
-                  <div class="col-3 col-box-6">
+				  
+				  <div class="col-3 col-box-6">
                     <div class="box bg-red bmh-75">
-                      <a onclick="cancelPage()" href="./?hotspot-user=generate&session=<?= $session; ?>">
+                      <a href="./?hotspot-user=generate&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_generate ?></span>
@@ -227,6 +174,12 @@ if (!isset($_SESSION["mikhmon"])) {
             </div>
           </div>
           </div>
+		  
+    
+
+        <div class="row">
+          <div  class="col-8">
+
 		  
 		  
             <div class="card">
@@ -355,31 +308,7 @@ if (!isset($_SESSION["mikhmon"])) {
 			  
             </div>  
             <div class="col-4">
-            <div id="r_4" class="row">
-              <div <?= $lreport; ?> class="box bmh-75 box-bordered">
-                <div class="box-group">
-                  <div class="box-group-icon"><i class="fa fa-money"></i></div>
-                    <div class="box-group-area">
-                      <span >
-                        <div id="reloadLreport">
-                          <?php 
-                          if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){
-                            echo $_income." <br/>" . "
-                          ".$_today." " . $_SESSION[$session.'totalHr'] . "vcr : " . $currency . " " . $_SESSION[$session.'dincome']. "<br/>
-                          ".$_this_month." " . $_SESSION[$session.'totalBl'] . "vcr : " . $currency . " " . $_SESSION[$session.'mincome']; 
-                          }else{
-                            echo "<div id='loader' ><i><span> <i class='fa fa-circle-o-notch fa-spin'></i> ". $_processing." </i></div>";
-                          }
-                          ?>                       
-                        </div>
-                    </span>
-                </div>
-              </div>
-            </div>
-            </div>
-			
             <div id="r_3" class="row">
-			
             <div class="card">
               <div class="card-header">
                 <h3><a onclick="cancelPage()" href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
@@ -404,8 +333,83 @@ if (!isset($_SESSION["mikhmon"])) {
                   </div>
                 </div>
               </div>
-              </div>
-			  
+              </div>  
             </div>
+			
+
+			
 </div>
+
+              <div <?= $lreport; ?> class="box bmh-75 box-bordered">
+                <div class="box-group">
+                  <div class="box-group-icon"><i class="fa fa-money"></i></div>
+                    <div class="box-group-area">
+                      <span >
+                        <div id="reloadLreport">
+                          <?php 
+                          if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){
+                            echo $_income." <br/>" . "
+                          ".$_today." " . $_SESSION[$session.'totalHr'] . "vcr : " . $currency . " " . $_SESSION[$session.'dincome']. "<br/>
+                          ".$_this_month." " . $_SESSION[$session.'totalBl'] . "vcr : " . $currency . " " . $_SESSION[$session.'mincome']; 
+                          }else{
+                            echo "<div id='loader' ><i><span> <i class='fa fa-circle-o-notch fa-spin'></i> ". $_processing." </i></div>";
+                          }
+                          ?>                       
+                        </div>
+                    </span>
+                </div>
+              </div>
+            </div>
+
+			
+	<div id="r_1" class="row">	
+      <div class="col-4">
+        <div class="box bmh-75 box-bordered">
+          <div class="box-group">
+            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
+              <div class="box-group-area">
+                <span ><?= $_system_date_time ?><br>
+                    <?php 
+                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
+                    ".$_uptime." : " . formatDTM($resource['uptime']);
+                    $_SESSION[$session.'sdate'] = $clock['date'];
+                    ?>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col-4">
+        <div class="box bmh-75 box-bordered">
+          <div class="box-group">
+          <div class="box-group-icon"><i class="fa fa-info-circle"></i></div>
+              <div class="box-group-area">
+                <span >
+                    <?php
+                    echo $_board_name." : " . $resource['board-name'] . "<br/>
+                    ".$_model." : " . $routerboard['model'] . "<br/>
+                    Router OS : " . $resource['version'];
+                    ?>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+    <div class="col-4">
+      <div class="box bmh-75 box-bordered">
+        <div class="box-group">
+          <div class="box-group-icon"><i class="fa fa-server"></i></div>
+              <div class="box-group-area">
+                <span >
+                    <?php
+                    echo $_cpu_load." : " . $resource['cpu-load'] . "%<br/>
+                    ".$_free_memory." : " . formatBytes($resource['free-memory'], 2) . "<br/>
+                    ".$_free_hdd." : " . formatBytes($resource['free-hdd-space'], 2)
+                    ?>
+                </span>
+                </div>
+              </div>
+            </div>
+          </div> 
+      </div>
 </div>

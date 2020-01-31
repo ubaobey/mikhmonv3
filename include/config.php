@@ -8,8 +8,7 @@ $data['mikhmon'] = array ('1'=>'mikhmon<|<0','mikhmon>|>aA==');
 
 
 
-$data['UBAY'] = array ('1'=>'UBAY!192.168.50.1','UBAY@|@admin','UBAY#|#opKgn5KgrZOTsWJkaw==','UBAY%CAHYA HOTSPOT','UBAY^c.net','UBAY&Rp','UBAY*1000','UBAY(2','UBAY)','UBAY=disable','UBAY@!@disable');
-
+$data['192.168.10.2'] = array ('1'=>'192.168.10.2!192.168.10.2','192.168.10.2@|@admin','192.168.10.2#|#opKgn5KgrZOTsWJkaw==','192.168.10.2%CAHYA HOTSPOT','192.168.10.2^c.net','192.168.10.2&Rp','192.168.10.2*10','192.168.10.2(2','192.168.10.2)','192.168.10.2=disable','192.168.10.2@!@enable');
 
 
 

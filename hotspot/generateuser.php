@@ -65,8 +65,8 @@ date_default_timezone_set($_SESSION['timezone']);
 		$qty = ($_POST['qty']);
 		$server = "all";
 		$user = "vc";
-		$userl = "4";
-		$prefix = date('dm');
+		$userl = "6";
+		$prefix = date('d');
 		$char = "num";
 		$profile = "8-JAM";
 		$timelimit = "0";
@@ -189,24 +189,6 @@ date_default_timezone_set($_SESSION['timezone']);
 
 					$u[$i] = "$prefix$p[$i]";
 				}
-				if ($char == "mix") {
-					$p[$i] = randNLC($userl);
-
-
-					$u[$i] = "$prefix$p[$i]";
-				}
-				if ($char == "mix1") {
-					$p[$i] = randNUC($userl);
-
-
-					$u[$i] = "$prefix$p[$i]";
-				}
-				if ($char == "mix2") {
-					$p[$i] = randNULC($userl);
-
-
-					$u[$i] = "$prefix$p[$i]";
-				}
 
 			}
 			for ($i = 1; $i <= $qty; $i++) {
@@ -315,7 +297,7 @@ date_default_timezone_set($_SESSION['timezone']);
 	<tr>
     <td class="align-middle"><?= $_comment ?></td><td><input class="form-control " type="text" title="No special characters" id="comment" autocomplete="off" name="adcomment" value=""></td>
   </tr>
-   <tr >
+   <tr > 
     <td  colspan="4" class="align-middle w-12"  id="GetValidPrice">
     	<?php if ($genprof != "") {
 					echo $ValidPrice;
@@ -325,56 +307,28 @@ date_default_timezone_set($_SESSION['timezone']);
 </table>
 </form>
 </div>
+ 
 </div>
-</div>
-
-<div class="col-4">
-	<div class="card">
+<div class="card">
 		<div class="card-header">
 			<h3><i class="fa fa-ticket"></i> <?= $_last_generate ?></h3>
 		</div>
 		<div class="card-body">
 <table class="table table-bordered">
   <tr>
-  	<td><?= $_qty ?></td><td><?= $qty ?></td>
+  	<td><?= $_generate_code ?></td><td><?= $ucode ?></td>
   </tr>
   <tr>
   	<td><?= $_date ?></td><td><?= $udate ?></td>
-  </tr>
-  <tr>
-  	<td><?= $_profile ?></td><td><?= $uprofile ?></td>
-  </tr>
-  <tr>
-  	<td><?= $_validity ?></td><td><?= $uvalid ?></td>
-  <tr>
-  	<td><?= $_time_limit ?></td><td><?= $utlimit ?></td>
-  </tr>
-  <tr>
-  	<td><?= $_data_limit ?></td><td><?= $udlimit ?></td>
-  </tr>
-  <tr>
-  	<td><?= $_price ?></td><td><?= $uprice ?></td>
-  </tr>
-  <tr>
-  	<td><?= $_selling_price ?></td><td><?= $suprice ?></td>
-  </tr>
-  <tr>
-  	<td><?= $_lock_user ?></td><td><?= $ulock ?></td>
-  </tr>
-  <tr>
-    <td colspan="2">
-		<p style="padding:0px 5px;">
-      <?= $_format_time_limit ?>
-    </p>
-    <p style="padding:0px 5px;">
-      <?= $_details_add_user ?>
-    </p>
-    </td>
   </tr>
 </table>
 </div>
 </div>
 </div>
+
+
+	
+
 <script>
 // get valid $ price
 function GetVP(){
