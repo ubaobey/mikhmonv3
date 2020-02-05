@@ -13,7 +13,6 @@ function sendToQuickPrinterChrome(){
 						"<center><big><bold><?= $uname ?>\n" +
                         "<line0>\n" +
 						"<center>.\n" +
-						"<center>.\n" +
                         //"<line0>\n" +
                         <?php if($qrbt == "enable"){
                           echo '"<center><image>" + "'.$qrcode.'" +"\n"';
