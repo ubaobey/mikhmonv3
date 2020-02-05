@@ -47,6 +47,21 @@ $genprof = $_GET['genprof'];
 		$prefix = date('d');
 		$char = "num";
 		$profile = "8-JAM";
+		
+		$exp = date('m');
+		 if ($exp == "01") { $expired = "Februari"; }
+		 if ($exp == "02") { $expired = "Maret"; }
+		 if ($exp == "03") { $expired = "April"; }
+		 if ($exp == "04") { $expired = "Mei"; }
+		 if ($exp == "05") { $expired = "Juni"; }
+		 if ($exp == "06") { $expired = "Juli"; }
+		 if ($exp == "07") { $expired = "Agustus"; }
+		 if ($exp == "08") { $expired = "September"; }
+		 if ($exp == "09") { $expired = "Oktober"; }
+		 if ($exp == "10") { $expired = "November"; }
+		 if ($exp == "11") { $expired = "Desember"; }
+		 if ($exp == "12") { $expired = "Januari"; }
+		
 		$timelimit = "0";
 		$datalimit = "0";
 		$adcomment = ($_POST['adcomment']);
@@ -73,7 +88,7 @@ $genprof = $_GET['genprof'];
 		$getsprice = explode(",", $ponlogin)[4];
 		$getlock = explode(",", $ponlogin)[6];
 		$_SESSION['ubp'] = $profile;
-		$commt = $user . "-" . rand(100, 999) . "-" . date("d.m.y") . "-" . $adcomment;
+		$commt = $user . "-" . rand(100, 999) . "-Exp:" . date("d") . "-" . $expired . "-" . date("Y") . "-" . $adcomment;
 		$gentemp = $commt . "|~" . $profile . "~" . $getvalid . "~" . $getprice . "!".$getsprice."~" . $timelimit . "~" . $datalimit . "~" . $getlock;
 		$gen = '<?php $genu="'.encrypt($gentemp).'";?>';
 		$temp = './voucher/temp.php';
