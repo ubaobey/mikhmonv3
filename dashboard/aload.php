@@ -54,36 +54,12 @@ include('../lang/'.$langid.'.php');
 // get system resource MikroTik
     $getresource = $API->comm("/system/resource/print");
     $resource = $getresource[0];
-	
- // get temperature MikroTik
-  $getresource = $API->comm("/system/healt/print");
-  $health = $getresource[0];	
 
 // get routeboard info
     $getrouterboard = $API->comm("/system/routerboard/print");
     $routerboard = $getrouterboard[0];
     ?>
-    
-    <div id="r_1" class="row">
-    <div class="col-4">
-      <div class="box bmh-75 box-bordered">
-        <div class="box-group">
-          <div class="box-group-icon"><i class="fa fa-server"></i></div>
-              <div class="box-group-area">
-                <span >
-                    <?php
-                    echo $_cpu_load." : ". $resource['cpu-load'] . "% <br/>"
-					.$_free_memory." : ". formatBytes($resource['free-memory'], 2) . " | "
-					.$_free_hdd." : ". formatBytes($resource['free-hdd-space'], 2). " <br/> "
-					.Volt." : " . $health['voltage'] . "V" . " | " . Temperature." : " 	
-					. $health['temperature'] ."C"
-                    ?>
-                </span>
-                </div>
-              </div>
-            </div>
-          </div> 
-      </div>
+
 
 <?php 
 } else if ($load == "hotspot") {
@@ -106,10 +82,8 @@ include('../lang/'.$langid.'.php');
   }
 
   ?>
+
             <div id="r_2" class="card">
-              <div class="card-header"><h3><i class="fa fa-wifi"></i> Hotspot</h3></div>
-                <div class="card-body">
-                  <div class="row">
                     <div class="col-3 col-box-6">
                       <div class="box bg-blue bmh-75">
                         <a href="./?hotspot=active&session=<?= $session; ?>">
@@ -135,9 +109,7 @@ include('../lang/'.$langid.'.php');
                     </div>
                   </div>
               </div>
-            </div>
-          </div>
-          </div>
+			   
 <?php 
 } else if ($load == "logs") {
 
@@ -167,8 +139,11 @@ include('../lang/'.$langid.'.php');
 
 
   ?>
+  
               <div id="r_3" class="row">
               <div class="card">
+                <div class="card-header">
+                  <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
                     <div class="card-body">
                       <div style="padding: 5px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
                         <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
