@@ -54,6 +54,10 @@ include('../lang/'.$langid.'.php');
 // get system resource MikroTik
     $getresource = $API->comm("/system/resource/print");
     $resource = $getresource[0];
+	
+ // get temperature MikroTik
+  $getresource = $API->comm("/system/healt/print");
+  $health = $getresource[0];	
 
 // get routeboard info
     $getrouterboard = $API->comm("/system/routerboard/print");
@@ -99,9 +103,11 @@ include('../lang/'.$langid.'.php');
               <div class="box-group-area">
                 <span >
                     <?php
-                    echo $_cpu_load." : " . $resource['cpu-load'] . "%<br/>
-                    ".$_free_memory." : " . formatBytes($resource['free-memory'], 2) . "<br/>
-                    ".$_free_hdd." : " . formatBytes($resource['free-hdd-space'], 2)
+                    echo $_cpu_load." : ". $resource['cpu-load'] . "% <br/>"
+					.$_free_memory." : ". formatBytes($resource['free-memory'], 2) . " | "
+					.$_free_hdd." : ". formatBytes($resource['free-hdd-space'], 2). " <br/> "
+					.Volt." : " . $health['voltage'] . "V" . " | " . Temperature." : " 	
+					. $health['temperature'] ."C"
                     ?>
                 </span>
                 </div>
@@ -162,7 +168,7 @@ include('../lang/'.$langid.'.php');
                   </div>
                   <div class="col-3 col-box-6">
                     <div class="box bg-yellow bmh-75">
-                      <a href="./?hotspot=quick-print&session=<?= $session; ?>">
+                      <a href="./?hotspot-user=add&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_add ?></span>
@@ -176,7 +182,7 @@ include('../lang/'.$langid.'.php');
                   </div>
                   <div class="col-3 col-box-6">
                     <div class="box bg-red bmh-75">
-                      <a href="./?hotspot=quick-print&session=<?= $session; ?>">
+                      <a href="./?hotspot-user=generate&session=<?= $session; ?>">
                         <div>
                           <h1><i class="fa fa-user-plus"></i>
                               <span style="font-size: 15px;"><?= $_generate ?></span>
