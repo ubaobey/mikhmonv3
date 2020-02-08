@@ -65,37 +65,6 @@ include('../lang/'.$langid.'.php');
     ?>
     
     <div id="r_1" class="row">
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
-              <div class="box-group-area">
-              <span ><?= $_system_date_time ?><br>
-                    <?php 
-                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
-                    ".$_uptime." : " . formatDTM($resource['uptime']);
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-          <div class="box-group-icon"><i class="fa fa-info-circle"></i></div>
-              <div class="box-group-area">
-                <span >
-                    <?php
-                    echo $_board_name." : " . $resource['board-name'] . "<br/>
-                    ".$_model." : " . $routerboard['model'] . "<br/>
-                    Router OS : " . $resource['version'];
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
     <div class="col-4">
       <div class="box bmh-75 box-bordered">
         <div class="box-group">
@@ -137,7 +106,6 @@ include('../lang/'.$langid.'.php');
   }
 
   ?>
-    
             <div id="r_2" class="card">
               <div class="card-header"><h3><i class="fa fa-wifi"></i> Hotspot</h3></div>
                 <div class="card-body">
@@ -166,39 +134,10 @@ include('../lang/'.$langid.'.php');
                       </a>
                     </div>
                   </div>
-                  <div class="col-3 col-box-6">
-                    <div class="box bg-yellow bmh-75">
-                      <a href="./?hotspot-user=add&session=<?= $session; ?>">
-                        <div>
-                          <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;"><?= $_add ?></span>
-                          </h1>
-                        </div>
-                        <div>
-                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-3 col-box-6">
-                    <div class="box bg-red bmh-75">
-                      <a href="./?hotspot-user=generate&session=<?= $session; ?>">
-                        <div>
-                          <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;"><?= $_generate ?></span>
-                          </h1>
-                        </div>
-                        <div>
-                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
-                        </div>
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
           </div>
-
 <?php 
 } else if ($load == "logs") {
 
@@ -228,11 +167,8 @@ include('../lang/'.$langid.'.php');
 
 
   ?>
-  
               <div id="r_3" class="row">
               <div class="card">
-                <div class="card-header">
-                  <h3><a href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
                     <div class="card-body">
                       <div style="padding: 5px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
                         <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">

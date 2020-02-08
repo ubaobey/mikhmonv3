@@ -117,41 +117,31 @@ if (!isset($_SESSION["mikhmon"])) {
 ?>
     
 <div id="reloadHome">
-
-    <div id="r_1" class="row">
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
-              <div class="box-group-area">
-                <span ><?= $_system_date_time ?><br>
-                    <?php 
-                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
-                    ".$_uptime." : " . formatDTM($resource['uptime']);
-                    $_SESSION[$session.'sdate'] = $clock['date'];
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="col-4">
-        <div class="box bmh-75 box-bordered">
-          <div class="box-group">
-          <div class="box-group-icon"><i class="fa fa-info-circle"></i></div>
-              <div class="box-group-area">
-                <span >
-                    <?php
-                    echo $_board_name." : " . $resource['board-name'] . "<br/>
-                    ".$_model." : " . $routerboard['model'] . "<br/>
-                    Router OS : " . $resource['version'];
-                    ?>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-    <div class="col-4">
+<div class="col-2 col-box-6">
+                      <div class="box bg-blue bmh-75">
+                        <a onclick="cancelPage()" href="./?hotspot=active&session=<?= $session; ?>">
+                          <h1><?= $counthotspotactive; ?>
+                              <span style="font-size: 15px;"><?= $hunit; ?></span>
+                            </h1>
+                          <div>
+                            <i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+<div class="col-2 col-box-6">
+                    <div class="box bg-green bmh-75">
+                      <a onclick="cancelPage()" href="./?hotspot=users&profile=all&session=<?= $session; ?>">
+                            <h1><?= $countallusers; ?>
+                              <span style="font-size: 15px;"><?= $uunit; ?></span>
+                            </h1>
+                      <div>
+                            <i class="fa fa-users"></i> <?= $_hotspot_users ?>
+                          </div>
+                      </a>
+                    </div>
+                  </div>					
+<div class="col-4">
       <div class="box bmh-75 box-bordered">
         <div class="box-group">
           <div class="box-group-icon"><i class="fa fa-server"></i></div>
@@ -168,77 +158,35 @@ if (!isset($_SESSION["mikhmon"])) {
                 </div>
               </div>
             </div>
-          </div> 
-      </div>
-
-        <div class="row">
-          <div  class="col-8">
-            <div id="r_2"class="row">
-            <div class="card">
-              <div class="card-header"><h3><i class="fa fa-wifi"></i> Hotspot</h3></div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-3 col-box-6">
-                      <div class="box bg-blue bmh-75">
-                        <a onclick="cancelPage()" href="./?hotspot=active&session=<?= $session; ?>">
-                          <h1><?= $counthotspotactive; ?>
-                              <span style="font-size: 15px;"><?= $hunit; ?></span>
-                            </h1>
-                          <div>
-                            <i class="fa fa-laptop"></i> <?= $_hotspot_active ?>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="col-3 col-box-6">
-                    <div class="box bg-green bmh-75">
-                      <a onclick="cancelPage()" href="./?hotspot=users&profile=all&session=<?= $session; ?>">
-                            <h1><?= $countallusers; ?>
-                              <span style="font-size: 15px;"><?= $uunit; ?></span>
-                            </h1>
-                      <div>
-                            <i class="fa fa-users"></i> <?= $_hotspot_users ?>
-                          </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-3 col-box-6">
-                    <div class="box bg-yellow bmh-75"> 
-                      <a onclick="cancelPage()" href="./?hotspot=quick-print&session=<?= $session; ?>">
-                        <div>
-                          <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;"><?= $_add ?></span>
-                          </h1>
+          </div>
+<div class="col-4">	
+ <div id="r_4" class="row">
+              <div <?= $lreport; ?> class="box bmh-75 box-bordered">
+                <div class="box-group">
+                  <div class="box-group-icon"><i class="fa fa-money"></i></div>
+                    <div class="box-group-area">
+                      <span >
+                        <div id="reloadLreport">
+                          <?php 
+                          if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){
+                            echo $_income." <br/>" . "
+                          ".$_today." " . $_SESSION[$session.'totalHr'] . "vcr : " . $currency . " " . $_SESSION[$session.'dincome']. "<br/>
+                          ".$_this_month." " . $_SESSION[$session.'totalBl'] . "vcr : " . $currency . " " . $_SESSION[$session.'mincome']; 
+                          }else{
+                            echo "<div id='loader' ><i><span> <i class='fa fa-circle-o-notch fa-spin'></i> ". $_processing." </i></div>";
+                          }
+                          ?>                       
                         </div>
-                        <div>
-                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="col-3 col-box-6">
-                    <div class="box bg-red bmh-75">
-                      <a onclick="cancelPage()" href="./?hotspot-user=generate&session=<?= $session; ?>">
-                        <div>
-                          <h1><i class="fa fa-user-plus"></i>
-                              <span style="font-size: 15px;"><?= $_generate ?></span>
-                          </h1>
-                        </div>
-                        <div>
-                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
-                        </div>
-                    </a>
-                  </div>
+                    </span>
                 </div>
               </div>
             </div>
-          </div>
-          </div>
+            </div>	
+			</div>
+			
+          <div  class="col-8"> 
             <div class="card">
-              <div class="card-header"><h3><i class="fa fa-area-chart"></i> <?= $_traffic ?> </h3></div>
-
               <div class="card-body">
-  
                   <?php $getinterface = $API->comm("/interface/print");
                   $interface = $getinterface[$iface - 1]['name']; 
                   /*$TotalReg = count($getinterface);
@@ -246,7 +194,6 @@ if (!isset($_SESSION["mikhmon"])) {
                     echo $getinterface[$i]['name'].'<br>';
                   }*/
                   ?>
-                  
                   <script type="text/javascript"> 
                     var chart;
                     var sessiondata = "<?= $session ?>";
@@ -356,40 +303,16 @@ if (!isset($_SESSION["mikhmon"])) {
                 </div> 
               </div>
             </div>  
-            <div class="col-4">
-            <div id="r_4" class="row">
-              <div <?= $lreport; ?> class="box bmh-75 box-bordered">
-                <div class="box-group">
-                  <div class="box-group-icon"><i class="fa fa-money"></i></div>
-                    <div class="box-group-area">
-                      <span >
-                        <div id="reloadLreport">
-                          <?php 
-                          if ($_SESSION[$session.'sdate'] == $_SESSION[$session.'idhr']){
-                            echo $_income." <br/>" . "
-                          ".$_today." " . $_SESSION[$session.'totalHr'] . "vcr : " . $currency . " " . $_SESSION[$session.'dincome']. "<br/>
-                          ".$_this_month." " . $_SESSION[$session.'totalBl'] . "vcr : " . $currency . " " . $_SESSION[$session.'mincome']; 
-                          }else{
-                            echo "<div id='loader' ><i><span> <i class='fa fa-circle-o-notch fa-spin'></i> ". $_processing." </i></div>";
-                          }
-                          ?>                       
-                        </div>
-                    </span>
-                </div>
-              </div>
-            </div>
-            </div>
+           
+		   <div class="col-4">    
             <div id="r_3" class="row">
-            <div class="card">
-              <div class="card-header">
-                <h3><a onclick="cancelPage()" href="./?hotspot=log&session=<?= $session; ?>" title="Open Hotspot Log" ><i class="fa fa-align-justify"></i> <?= $_hotspot_log ?></a></h3></div>
                   <div class="card-body">
-                    <div style="padding: 5px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
-                      <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;">
+                    <div style="padding: 1px; height: <?= $logh; ?> ;" class="mr-t-10 overflow">
+                      <table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:5px;">
                         <thead>
                           <tr>
                             <th><?= $_time ?></th>
-                            <th><?= $_users ?> (IP)</th>
+                            <th><?= $_users ?>(IP)</th>
                             <th><?= $_messages ?></th>
                           </tr>
                         </thead>
@@ -402,9 +325,8 @@ if (!isset($_SESSION["mikhmon"])) {
                       </tbody>
                     </table>
                   </div>
-                </div>
+                
               </div>
               </div>
-            </div>
-</div>
+			</div>
 </div>
