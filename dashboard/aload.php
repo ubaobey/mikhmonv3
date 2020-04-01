@@ -54,12 +54,67 @@ include('../lang/'.$langid.'.php');
 // get system resource MikroTik
     $getresource = $API->comm("/system/resource/print");
     $resource = $getresource[0];
+	
+ // get temperature MikroTik
+  $getresource = $API->comm("/system/healt/print");
+  $health = $getresource[0];	
 
 // get routeboard info
     $getrouterboard = $API->comm("/system/routerboard/print");
     $routerboard = $getrouterboard[0];
     ?>
-
+    
+    <div id="r_1" class="row">
+      <div class="col-4">
+        <div class="box bmh-75 box-bordered">
+          <div class="box-group">
+            <div class="box-group-icon"><i class="fa fa-calendar"></i></div>
+              <div class="box-group-area">
+              <span ><?= $_system_date_time ?><br>
+                    <?php 
+                    echo ucfirst($clock['date']) . " " . $clock['time'] . "<br>
+                    ".$_uptime." : " . formatDTM($resource['uptime']);
+                    ?>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col-4">
+        <div class="box bmh-75 box-bordered">
+          <div class="box-group">
+          <div class="box-group-icon"><i class="fa fa-info-circle"></i></div>
+              <div class="box-group-area">
+                <span >
+                    <?php
+                    echo $_board_name." : " . $resource['board-name'] . "<br/>
+                    ".$_model." : " . $routerboard['model'] . "<br/>
+                    Router OS : " . $resource['version'];
+                    ?>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+    <div class="col-4">
+      <div class="box bmh-75 box-bordered">
+        <div class="box-group">
+          <div class="box-group-icon"><i class="fa fa-server"></i></div>
+              <div class="box-group-area">
+                <span >
+                    <?php
+                    echo $_cpu_load." : ". $resource['cpu-load'] . "% <br/>"
+					.$_free_memory." : ". formatBytes($resource['free-memory'], 2) . " | "
+					.$_free_hdd." : ". formatBytes($resource['free-hdd-space'], 2). " <br/> "
+					.Volt." : " . $health['voltage'] . "V" . " | " . Temperature." : " 	
+					. $health['temperature'] ."C"
+                    ?>
+                </span>
+                </div>
+              </div>
+            </div>
+          </div> 
+      </div>
 
 <?php 
 } else if ($load == "hotspot") {
@@ -82,8 +137,11 @@ include('../lang/'.$langid.'.php');
   }
 
   ?>
-
+    
             <div id="r_2" class="card">
+              <div class="card-header"><h3><i class="fa fa-wifi"></i> Hotspot</h3></div>
+                <div class="card-body">
+                  <div class="row">
                     <div class="col-3 col-box-6">
                       <div class="box bg-blue bmh-75">
                         <a href="./?hotspot=active&session=<?= $session; ?>">
@@ -108,8 +166,39 @@ include('../lang/'.$langid.'.php');
                       </a>
                     </div>
                   </div>
+                  <div class="col-3 col-box-6">
+                    <div class="box bg-yellow bmh-75">
+                      <a href="./?hotspot-user=add&session=<?= $session; ?>">
+                        <div>
+                          <h1><i class="fa fa-user-plus"></i>
+                              <span style="font-size: 15px;"><?= $_add ?></span>
+                          </h1>
+                        </div>
+                        <div>
+                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-3 col-box-6">
+                    <div class="box bg-red bmh-75">
+                      <a href="./?hotspot-user=generate&session=<?= $session; ?>">
+                        <div>
+                          <h1><i class="fa fa-user-plus"></i>
+                              <span style="font-size: 15px;"><?= $_generate ?></span>
+                          </h1>
+                        </div>
+                        <div>
+                            <i class="fa fa-user-plus"></i> <?= $_hotspot_users ?>
+                        </div>
+                    </a>
+                  </div>
+                </div>
               </div>
-			   
+            </div>
+          </div>
+          </div>
+
 <?php 
 } else if ($load == "logs") {
 

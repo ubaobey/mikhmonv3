@@ -1,13 +1,33 @@
 <?php
-
+/*
+ *  Copyright (C) 2018 Laksamadi Guko.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+session_start();
+// hide all error
 error_reporting(0);
+
+ini_set('max_execution_time', 300);
+
 if (!isset($_SESSION["mikhmon"])) {
-  header("Location:../admin.php?id=login");
+	header("Location:../admin.php?id=login");
 } else {
-// array color
-  $color = array('1' => 'bg-blue', 'bg-indigo', 'bg-purple', 'bg-pink', 'bg-red', 'bg-yellow', 'bg-green', 'bg-teal', 'bg-cyan', 'bg-grey', 'bg-light-blue');
+// time zone
 date_default_timezone_set($_SESSION['timezone']);
-$genprof = $_GET['genprof'];
+
+	$genprof = $_GET['genprof'];
 	if ($genprof != "") {
 		$getprofile = $API->comm("/ip/hotspot/user/profile/print", array(
 			"?name" => "$genprof",
@@ -37,7 +57,9 @@ $genprof = $_GET['genprof'];
 		$ValidPrice = "<b>Validity : " . $getvalid . " | Price : " . $getprice . " | Lock User : " . $getlocku . "</b>";
 	} else {
 	}
+
 	$srvlist = $API->comm("/ip/hotspot/print");
+
 	if (isset($_POST['qty'])) {
 		
 		$qty = ($_POST['qty']);
@@ -45,25 +67,23 @@ $genprof = $_GET['genprof'];
 		$user = "vc";
 		$userl = "6";
 		$prefix = date('d');
-		$char = "num";
+		$char = "lower";
 		$profile = "8-JAM";
-		
 		$exp = date('m');
-		 if ($exp == "01") { $expired = "Februari"; }
-		 if ($exp == "02") { $expired = "Maret"; }
-		 if ($exp == "03") { $expired = "April"; }
-		 if ($exp == "04") { $expired = "Mei"; }
-		 if ($exp == "05") { $expired = "Juni"; }
-		 if ($exp == "06") { $expired = "Juli"; }
-		 if ($exp == "07") { $expired = "Agustus"; }
-		 if ($exp == "08") { $expired = "September"; }
-		 if ($exp == "09") { $expired = "Oktober"; }
-		 if ($exp == "10") { $expired = "November"; }
-		 if ($exp == "11") { $expired = "Desember"; }
-		 if ($exp == "12") { $expired = "Januari"; }
-		
-		$timelimit = "0";
-		$datalimit = "0";
+		 if ($exp == "01") { $expired = "Maret"; }
+		 if ($exp == "02") { $expired = "April"; }
+		 if ($exp == "03") { $expired = "Mei"; }
+		 if ($exp == "04") { $expired = "Juni"; }
+		 if ($exp == "05") { $expired = "Juli"; }
+		 if ($exp == "06") { $expired = "Agustus"; }
+		 if ($exp == "07") { $expired = "September"; }
+		 if ($exp == "08") { $expired = "Oktober"; }
+		 if ($exp == "09") { $expired = "November"; }
+		 if ($exp == "10") { $expired = "Desember"; }
+		 if ($exp == "11") { $expired = "Januari"; }
+		 if ($exp == "12") { $expired = "Februari"; }
+		$timelimit = "";
+		$datalimit = "";
 		$adcomment = ($_POST['adcomment']);
 		$mbgb = ($_POST['mbgb']);
 		if ($timelimit == "") {
@@ -182,6 +202,24 @@ $genprof = $_GET['genprof'];
 
 					$u[$i] = "$prefix$p[$i]";
 				}
+				if ($char == "mix") {
+					$p[$i] = randNLC($userl);
+
+
+					$u[$i] = "$prefix$p[$i]";
+				}
+				if ($char == "mix1") {
+					$p[$i] = randNUC($userl);
+
+
+					$u[$i] = "$prefix$p[$i]";
+				}
+				if ($char == "mix2") {
+					$p[$i] = randNULC($userl);
+
+
+					$u[$i] = "$prefix$p[$i]";
+				}
 
 			}
 			for ($i = 1; $i <= $qty; $i++) {
@@ -204,6 +242,7 @@ $genprof = $_GET['genprof'];
 			echo "<script>window.location='./?hotspot-user=generate&session=" . $session . "'</script>";
 		}
 	}
+
 	$getprofile = $API->comm("/ip/hotspot/user/profile/print");
 	include_once('./voucher/temp.php');
 	$genuser = explode("-", decrypt($genu));
@@ -255,83 +294,11 @@ $genprof = $_GET['genprof'];
 
 	}
 
-  ?>
-<div id="reloadHome">
-<div class="row">
-<div class="col-12">
-<div class="card">
-<div class="card-body">
-<div class="overflow" style="max-height: 80vh">	
-<div class="row">
-
-<?php
-// get quick print
-$getquickprint = $API->comm("/system/script/print", array("?comment" => "CAHYA"));
-$TotalReg = count($getquickprint);
-for ($i = 0; $i < $TotalReg; $i++) {
-  $quickprintdetails = $getquickprint[$i];
-  $qpname = $quickprintdetails['name'];
-  $qpid = $quickprintdetails['.id'];
-  $quickprintsource = explode("#",$quickprintdetails['source']);
-  $package = $quickprintsource[1];
-  $server = $quickprintsource[2];
-  $usermode = $quickprintsource[3];
-  $userlength = $quickprintsource[4];
-  $prefix = $quickprintsource[5];
-  $char = $quickprintsource[6];
-  $profile = $quickprintsource[7];
-  $timelimit = $quickprintsource[8];
-  $datalimit = $quickprintsource[9];
-  $comment = $quickprintsource[10];
-  $validity = $quickprintsource[11];
-  $getprice = explode("_",$quickprintsource[12])[0];
-  $getsprice = explode("_",$quickprintsource[12])[1];
-  $userlock = $quickprintsource[13];
-  if ($currency == in_array($currency, $cekindo['indo'])) {
-    $price = $currency . " " . number_format($getprice, 0, ",", ".");
-    $sprice = $currency . " " . number_format($getsprice, 0, ",", ".");
-} else {
-    $price = $currency . " " . number_format($getprice);
-    $sprice = $currency . " " . number_format($getsprice);
 }
-  ?>
-	     <div class="col-4">
-        <div id='./hotspot/quickuser.php?quickprint=<?= $qpname ?>&session=<?= $session; ?>' class="quick pointer box bmh-75 box-bordered <?= $color[rand(1, 11)]; ?>" title='<?= $_print.' '.$_package.' '. $package; ?>'>
-          <div class="box-group">
-            <div class="box-group-icon">
-            	<i class="fa fa-print"></i>
-            </div>
-              <div class="box-group-area">
-                <h3 ><?= $_package ?> : <?= $package; ?> <br></h3>
-                <span><?= $_time_limit ?>  : <?= $timelimit ?> | <?= $_data_limit ?>  : <?= formatBytes($datalimit, 2) ?> <br> <?= $_validity ?>  : <?= $validity ?> | <?= $_price ?>  : <?= $price ?> | <?= $_selling_price ?>  : <?= $sprice ?></span>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        <?php 
-      }
-    }
+?>
+<div class="row">
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    ?>
-    </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-
-<div>
-<div class="col-12">
+<div class="col-8">
 <div class="card box-bordered">
 	<div class="card-header">
 	<h3><i class="fa fa-user-plus"></i> <?= $_generate_user ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3> 
@@ -339,6 +306,15 @@ for ($i = 0; $i < $TotalReg; $i++) {
 	<div class="card-body">
 <form autocomplete="off" method="post" action="">
 	<div>
+		<?php if ($_SESSION['ubp'] != "") {
+		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=" . $_SESSION['ubp'] . "&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
+	} elseif ($_SESSION['vcr'] = "active") {
+		echo "    <a class='btn bg-warning' href='./?hotspot=users-by-profile&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
+	} else {
+		echo "    <a class='btn bg-warning' href='./?hotspot=users&profile=all&session=" . $session . "'> <i class='fa fa-close'></i> ".$_close."</a>";
+	}
+
+	?>
 	<a class="btn bg-pink" title="Open User List by Profile 
 <?php if ($_SESSION['ubp'] == "") {
 	echo "all";
@@ -352,16 +328,18 @@ for ($i = 0; $i < $TotalReg; $i++) {
 } ?>&session=<?= $session; ?>"> <i class="fa fa-users"></i> <?= $_user_list ?></a>
     <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> <?= $_generate ?></button>
     <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print ?></a>
+    <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
+    <a class="btn bg-info" title="Print Small" href="./voucher/print.php?id=<?= $urlprint; ?>&small=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print_small ?></a>
 </div>
 <table class="table">
   <tr>
-    <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="" required="1"></div></td>
+    <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="1" required="1"></div></td>
   </tr>
 
 	<tr>
     <td class="align-middle"><?= $_comment ?></td><td><input class="form-control " type="text" title="No special characters" id="comment" autocomplete="off" name="adcomment" value=""></td>
   </tr>
-   <tr > 
+   <tr >
     <td  colspan="4" class="align-middle w-12"  id="GetValidPrice">
     	<?php if ($genprof != "") {
 					echo $ValidPrice;
@@ -372,8 +350,10 @@ for ($i = 0; $i < $TotalReg; $i++) {
 </form>
 </div>
 </div>
+</div>
 
-<div class="card" class="col-12">
+<div class="col-4">
+	<div class="card">
 		<div class="card-header">
 			<h3><i class="fa fa-ticket"></i> <?= $_last_generate ?></h3>
 		</div>
@@ -385,21 +365,45 @@ for ($i = 0; $i < $TotalReg; $i++) {
   <tr>
   	<td><?= $_date ?></td><td><?= $udate ?></td>
   </tr>
+  <tr>
+  	<td><?= $_profile ?></td><td><?= $uprofile ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_validity ?></td><td><?= $uvalid ?></td>
+  <tr>
+  	<td><?= $_time_limit ?></td><td><?= $utlimit ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_data_limit ?></td><td><?= $udlimit ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_price ?></td><td><?= $uprice ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_selling_price ?></td><td><?= $suprice ?></td>
+  </tr>
+  <tr>
+  	<td><?= $_lock_user ?></td><td><?= $ulock ?></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+		<p style="padding:0px 5px;">
+      <?= $_format_time_limit ?>
+    </p>
+    <p style="padding:0px 5px;">
+      <?= $_details_add_user ?>
+    </p>
+    </td>
+  </tr>
 </table>
 </div>
 </div>
 </div>
-</div>
-</div>
-
-
 <script>
-$(document).ready(function(){
-  $(".quick").click(function(){
-
-    loadpage(this.id);
-    
-  });
-
-});
+// get valid $ price
+function GetVP(){
+  var prof = document.getElementById('uprof').value;
+  $("#GetValidPrice").load("./process/getvalidprice.php?name="+prof+"&session=<?= $session; ?> #getdata");
+} 
 </script>
+</div>
