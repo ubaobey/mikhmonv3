@@ -70,18 +70,18 @@ date_default_timezone_set($_SESSION['timezone']);
 		$char = "lower";
 		$profile = "8-JAM";
 		$exp = date('m');
-		 if ($exp == "01") { $expired = "Maret"; }
-		 if ($exp == "02") { $expired = "April"; }
-		 if ($exp == "03") { $expired = "Mei"; }
-		 if ($exp == "04") { $expired = "Juni"; }
-		 if ($exp == "05") { $expired = "Juli"; }
-		 if ($exp == "06") { $expired = "Agustus"; }
-		 if ($exp == "07") { $expired = "September"; }
-		 if ($exp == "08") { $expired = "Oktober"; }
-		 if ($exp == "09") { $expired = "November"; }
-		 if ($exp == "10") { $expired = "Desember"; }
-		 if ($exp == "11") { $expired = "Januari"; }
-		 if ($exp == "12") { $expired = "Februari"; }
+		 if ($exp == "02") { $expired = "Maret"; }
+		 if ($exp == "03") { $expired = "April"; }
+		 if ($exp == "04") { $expired = "Mei"; }
+		 if ($exp == "05") { $expired = "Juni"; }
+		 if ($exp == "06") { $expired = "Juli"; }
+		 if ($exp == "07") { $expired = "Agustus"; }
+		 if ($exp == "08") { $expired = "September"; }
+		 if ($exp == "09") { $expired = "Oktober"; }
+		 if ($exp == "10") { $expired = "November"; }
+		 if ($exp == "11") { $expired = "Desember"; }
+		 if ($exp == "12") { $expired = "Januari"; }
+		 if ($exp == "01") { $expired = "Februari"; }
 		$timelimit = "";
 		$datalimit = "";
 		$adcomment = ($_POST['adcomment']);
@@ -328,12 +328,10 @@ date_default_timezone_set($_SESSION['timezone']);
 } ?>&session=<?= $session; ?>"> <i class="fa fa-users"></i> <?= $_user_list ?></a>
     <button type="submit" name="save" onclick="loader()" class="btn bg-primary" title="Generate User"> <i class="fa fa-save"></i> <?= $_generate ?></button>
     <a class="btn bg-secondary" title="Print Default" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=no&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print ?></a>
-    <a class="btn bg-danger" title="Print QR" href="./voucher/print.php?id=<?= $urlprint; ?>&qr=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-qrcode"></i> <?= $_print_qr ?></a>
-    <a class="btn bg-info" title="Print Small" href="./voucher/print.php?id=<?= $urlprint; ?>&small=yes&session=<?= $session; ?>" target="_blank"> <i class="fa fa-print"></i> <?= $_print_small ?></a>
 </div>
 <table class="table">
   <tr>
-    <td class="align-middle"><?= $_qty ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="500" value="1" required="1"></div></td>
+    <td class="align-middle"><?= Jumlah ?></td><td><div><input class="form-control " type="number" name="qty" min="1" max="1000" value="1" required="1"></div></td>
   </tr>
 
 	<tr>
